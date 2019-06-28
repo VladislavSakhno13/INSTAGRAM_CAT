@@ -1,0 +1,29 @@
+.cat1{
+    width:  300px;
+    height: 300px;
+    border: 1px solid red;
+}
+.cat{
+
+    width:  300px;
+    height: 300px;
+}
+.basicBlock{
+    width: 50%;
+    border: 1px solid #000;
+}
+
+.basicBlock,.add{
+    display: inline-block;
+    float: left;
+   
+}
+.add{
+    width: 50%;
+    height: 200px;
+    border: 1px solid #000;
+}
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
