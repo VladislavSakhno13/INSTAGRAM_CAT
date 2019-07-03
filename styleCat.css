@@ -1,28 +1,4 @@
-.cat1{
-    width:  300px;
-    height: 300px;
-    border: 1px solid red;
-}
-.cat{
 
-    width:  300px;
-    height: 300px;
-}
-.basicBlock{
-    width: 50%;
-    border: 1px solid #000;
-}
-
-.basicBlock,.add{
-    display: inline-block;
-    float: left;
-   
-}
-.add{
-    width: 50%;
-    height: 200px;
-    border: 1px solid #000;
-}
 *{
     margin: 0;
     box-sizing: border-box;
@@ -30,4 +6,50 @@
 img{
     width: 300px;
     height: 300px;
+    box-shadow: 5 5 1px  #000;
+    box-shadow: 5px 5px 10px  #000;
+}
+
+#like{
+    margin-top: 10px;
+    
+    
+}
+
+
+
+
+
+.mainBox,.BoxUrl{
+    display: inline-block;
+    width: 50%;
+    float: left;
+}
+.mainBox > div{
+    position: relative;
+    left: 50%;
+    margin-left: -150px;
+
+    
+}
+body{
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU9idVOk4oQ15pJ8CdkzI1iv6f5CT4tK_Xr7eg5L-TMKY6I_m6Ug);
+}
+.BoxUrl{
+    /* background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXVP2W9_NFjnZnLSqXd1jBrhlE8zfleY166B9jKLHZrsvZgthy1Q); */
+    height: 100vh;
+}
+#idImg{
+    width: 300px;
+    height: 300px;
+    border: 1px solid #000;
+    box-shadow: 5px 5px 10px  #000;
+}
+.BoxUrl > div{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    left: 50%;
+    margin-left: -150px;
+    margin-top: 100px;
 }

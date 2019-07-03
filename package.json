@@ -1,0 +1,23 @@
+{
+  "name": "instagram_cat-catsnumber2.2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cat_js.js",
+  "dependencies": {
+    "serve": "^11.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladislavSakhno13/INSTAGRAM_CAT.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VladislavSakhno13/INSTAGRAM_CAT/issues"
+  },
+  "homepage": "https://github.com/VladislavSakhno13/INSTAGRAM_CAT#readme"
+}
