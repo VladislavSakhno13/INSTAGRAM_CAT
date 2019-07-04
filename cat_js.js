@@ -1,34 +1,44 @@
+//dfdfdf
+
 var xhr = new XMLHttpRequest();
 
-      xhr.open('GET', 'catsstore.json', false);
+      xhr.open('GET', 'catsstore.json', true);
+
+      xhr.onload = function(){
+          if(xhr.readyState === 4){
+              if(xhr.status === 200){
+                  const cats = JSON.parse(xhr.responseText);
+                for (var i = 0; i < cats.length; i++) {
+                    createCat(cats[i]);
+                }
+                document.getElementById('saveimg').onclick = function () {
+                    const cat = {
+                        "id": cats.length + 1, 
+                        "title": document.getElementById('nameforcat').value, 
+                        "url": document.getElementById('urlimg').value, 
+                        "likes": 0
+                    }
+                    cats.push(cat);
+                    createCat(cat);
+                    document.getElementById('cartinka').src = "";
+                    document.getElementById('urlimg').value = "";
+                    document.getElementById('nameforcat').value = "";
+                
+                }
+              } else { 
+                  console.log(xhr.status);
+
+              }
+          }
+      };
+
       xhr.send();
-
-      if (xhr.status != 200) {
-        // обработать ошибку
-        alert('Ошибка ' + xhr.status + ': ' + xhr.statusText);
-      } else {
-        // вывести результат
-        alert(xhr.responseText);
-      }
-    
-
-
-
-const cats = [
-    { "id": 1, "title": "cat 1", "url": "https://http.cat/200", "likes": 0 },
-    { "id": 2, "title": "cat 2", "url": "https://http.cat/404", "likes": 0 },
-    { "id": 3, "title": "cat 3", "url": "https://http.cat/500", "likes": 0 },
-    { "id": 4, "title": "cat 4", "url": "https://http.cat/400", "likes": 0 }];
-
-
-
 
 function createCat(cat) {
     const divElement = createCatHtml(cat);
     document.getElementsByClassName('mainBox')[0].appendChild(divElement);
     updateCatHtml(divElement, cat);
 }
-
 function createCatHtml(cat) {
     const div = document.createElement('div');
     div.id = 'cat_' + cat.id;
@@ -43,12 +53,11 @@ function createCatHtml(cat) {
     like.type = "button";
     like.value = "Like";
     like.id = "like";
+    //like.src = "https://vse-frazi.ru/wp-content/uploads/2017/08/1-4-3.jpg";
     
-
     const span = document.createElement('span');
     span.id = "count";
     
-
     const input = document.createElement('input');
     input.id = "text";
 
@@ -59,7 +68,6 @@ function createCatHtml(cat) {
 
     const nameCat = document.createElement('span');
     nameCat.id = "nameImg";
-    
 
     div.appendChild(p);
     p.appendChild(img);
@@ -79,29 +87,18 @@ function createCatHtml(cat) {
          cat.title = e;
          updateCatHtml(this.parentElement,cat);
     }
-
     return div;
 }
-
 function updateCatHtml(divElement, cat) {
     document.querySelector("#cat_" + cat.id).querySelector('#count').innerText = cat.likes;
     document.querySelector("#cat_" + cat.id).querySelector('#nameImg').innerText = cat.title;
 
 }
-
-
-var luk = 0;
-
-
-
-for (var i = 0; i < cats.length; i++) {
-    createCat(cats[i]);
-}
 document.getElementById('show').onclick = function () {
    let urlnew =  document.getElementById('urlimg').value;
    document.getElementById('cartinka').src = urlnew;
 }
-document.getElementById('saveimg').onclick = function () {
+/*document.getElementById('saveimg').onclick = function () {
     const cat = {
         "id": cats.length + 1, 
         "title": document.getElementById('nameforcat').value, 
@@ -114,6 +111,6 @@ document.getElementById('saveimg').onclick = function () {
     document.getElementById('urlimg').value = "";
     document.getElementById('nameforcat').value = "";
 
-} 
+} */
  
  
