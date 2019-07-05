@@ -20,7 +20,7 @@ var xhr = new XMLHttpRequest();
                     }
                     cats.push(cat);
                     createCat(cat);
-                    document.getElementById('cartinka').src = "";
+                    document.getElementById('img-cat-create').src = "";
                     document.getElementById('urlimg').value = "";
                     document.getElementById('nameforcat').value = "";
                 
@@ -68,8 +68,7 @@ function createCatHtml(cat) {
     like.type = "button";
     like.value = "Like";
     like.id = "like";
-    //like.src = "https://vse-frazi.ru/wp-content/uploads/2017/08/1-4-3.jpg";
-    
+
     const span = document.createElement('span');
     span.id = "count";
     
@@ -111,21 +110,8 @@ function updateCatHtml(divElement, cat) {
 }
 document.getElementById('show').onclick = function () {
    let urlnew =  document.getElementById('urlimg').value;
-   document.getElementById('cartinka').src = urlnew;
+   document.getElementById('img-cat-create').src = urlnew;
 }
-/*document.getElementById('saveimg').onclick = function () {
-    const cat = {
-        "id": cats.length + 1, 
-        "title": document.getElementById('nameforcat').value, 
-        "url": document.getElementById('urlimg').value, 
-        "likes": 0
-    }
-    cats.push(cat);
-    createCat(cat);
-    document.getElementById('cartinka').src = "";
-    document.getElementById('urlimg').value = "";
-    document.getElementById('nameforcat').value = "";
 
-} */
  
  
