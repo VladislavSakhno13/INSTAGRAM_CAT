@@ -1,4 +1,4 @@
-//dfdfdf
+
 
 var xhr = new XMLHttpRequest();
 
@@ -25,6 +25,16 @@ var xhr = new XMLHttpRequest();
                     document.getElementById('nameforcat').value = "";
                 
                 }
+                document.getElementById('favorites-button').onclick = function(){
+                    const cat = {
+                        "id": cats.length + 1, 
+                        "title": document.getElementById('nameforcat').value, 
+                        "url": document.getElementById('urlimg').value, 
+                        "likes": 0
+                    }
+                    cats.push(cat);
+                    createFavoritesCat(cat);
+                }
               } else { 
                   console.log(xhr.status);
 
@@ -36,8 +46,13 @@ var xhr = new XMLHttpRequest();
 
 function createCat(cat) {
     const divElement = createCatHtml(cat);
-    document.getElementsByClassName('mainBox')[0].appendChild(divElement);
+    document.getElementById('cats-main-box').appendChild(divElement);
     updateCatHtml(divElement, cat);
+}
+function createFavoritesCat(cat){
+    const divcatElement = createCatHtml(cat);
+    document.getElementById('favorites').appendChild(divcatElement);
+    updateCatHtml(divcatElement,cat);
 }
 function createCatHtml(cat) {
     const div = document.createElement('div');

@@ -11,32 +11,24 @@ img{
 }
 
 #like{
-    margin-top: 10px;
-    
-    
+    margin-top: 10px;   
 }
-
-
-
-
-
 .mainBox,.BoxUrl{
     display: inline-block;
     width: 50%;
     float: left;
 }
-.mainBox > div{
+/*.mainBox > div{
     position: relative;
     left: 50%;
     margin-left: -150px;
 
     
-}
+}*/
 body{
     background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU9idVOk4oQ15pJ8CdkzI1iv6f5CT4tK_Xr7eg5L-TMKY6I_m6Ug);
 }
 .BoxUrl{
-    /* background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXVP2W9_NFjnZnLSqXd1jBrhlE8zfleY166B9jKLHZrsvZgthy1Q); */
     height: 100vh;
 }
 #idImg{
@@ -52,4 +44,14 @@ body{
     left: 50%;
     margin-left: -150px;
     margin-top: 100px;
+}
+#cats-main-box,#favorites{
+    display: inline-block;
+}
+#favorites{
+    position: absolute;
+}
+.mainBox > div{
+    margin-left: 60px;
+    margin-top: 30px;
 }
