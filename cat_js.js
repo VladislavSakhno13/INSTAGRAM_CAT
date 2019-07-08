@@ -12,6 +12,17 @@ var xhr = new XMLHttpRequest();
                     createCat(cats[i]);
                 }
                 document.getElementById('saveimg').onclick = function () {
+                    let check = document.getElementById('favorites-button').checked;
+                    if(check == true){
+                        const cat = {
+                            "id": cats.length + 1, 
+                            "title": document.getElementById('nameforcat').value, 
+                            "url": document.getElementById('urlimg').value, 
+                            "likes": 0
+                        }
+                        cats.push(cat);
+                        createFavoritesCat(cat);
+                    }
                     const cat = {
                         "id": cats.length + 1, 
                         "title": document.getElementById('nameforcat').value, 
@@ -23,18 +34,11 @@ var xhr = new XMLHttpRequest();
                     document.getElementById('img-cat-create').src = "";
                     document.getElementById('urlimg').value = "";
                     document.getElementById('nameforcat').value = "";
+
+                    
                 
                 }
-                document.getElementById('favorites-button').onclick = function(){
-                    const cat = {
-                        "id": cats.length + 1, 
-                        "title": document.getElementById('nameforcat').value, 
-                        "url": document.getElementById('urlimg').value, 
-                        "likes": 0
-                    }
-                    cats.push(cat);
-                    createFavoritesCat(cat);
-                }
+                
               } else { 
                   console.log(xhr.status);
 
