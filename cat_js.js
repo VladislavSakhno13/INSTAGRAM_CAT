@@ -12,6 +12,9 @@ xhr.onload = function () {
                 createCat(cats[i]);
             }
             document.getElementById('saveimg').onclick = function() {assignHandlers(cats)};
+           
+
+            
 
         } else {
             console.log(xhr.status);
@@ -20,9 +23,11 @@ xhr.onload = function () {
     }
 };
 
+
+
 function assignHandlers (cats) {
     
-    
+   
     const cat = {
         "id": cats.length + 1,
         "title": document.getElementById('nameforcat').value,
@@ -39,6 +44,8 @@ function assignHandlers (cats) {
 
 }
 
+
+
 xhr.send();
 
 function createCat(cat) {
@@ -46,11 +53,8 @@ function createCat(cat) {
     document.getElementById('cats-main-box').appendChild(divElement);
     updateCatHtml(divElement, cat);
 }
-function createFavoritesCat(cat) {
-    const divcatElement = createCatHtml(cat);
-    document.getElementById('favorites').appendChild(divcatElement);
-    updateCatHtml(divcatElement, cat);
-}
+
+
 function createCatHtml(cat) {
     const div = document.createElement('div');
     div.id = 'cat_' + cat.id;
@@ -84,6 +88,7 @@ function createCatHtml(cat) {
     favoritImg.type = "button";
     favoritImg.id = 'favoritIMG_' + cat.id;
     favoritImg.value = "favorits";
+    favoritImg.className = "getCat";
 
     div.appendChild(p);
     p.appendChild(img);
@@ -103,11 +108,23 @@ function createCatHtml(cat) {
         cat.title = e;
         updateCatHtml(this.parentElement, cat);
     }
+    favoritImg.onclick = function(){
+        const box = document.createElement('div');
+        box.id = 'cat-' + cat.id;
+        const par = document.createElement('p');
+        const favoritCat = document.createElement('img');
+        favoritCat.src = img.src;
+
+        par.appendChild(favoritCat);
+        box.appendChild(par);
+        document.getElementById('favorites').appendChild(box);
+    }
     return div;
 }
 function updateCatHtml(divElement, cat) {
     document.querySelector("#cat_" + cat.id).querySelector('#count').innerText = cat.likes;
     document.querySelector("#cat_" + cat.id).querySelector('#nameImg').innerText = cat.title;
+    //document.querySelector("#cat_" + cat.id).querySelector('#favoritIMG');
 
 }
 document.getElementById('show').onclick = function () {
