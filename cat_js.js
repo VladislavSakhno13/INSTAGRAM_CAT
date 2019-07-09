@@ -27,6 +27,10 @@ xhr.onload = function () {
 
 function assignHandlers (cats) {
    
+   if(document.getElementById('urlimg').value === ""){
+       alert("URL not defined!!!");
+       return false;  
+   }
     const cat = {
         "id": cats.length + 1,
         "title": document.getElementById('nameforcat').value,
@@ -112,9 +116,11 @@ function createCatHtml(cat) {
         cat.title = e;
         updateCatHtml(this.parentElement, cat);
     }
-    favoritImg.onclick =  function() {createfavoritCat(cat)};
+    favoritImg.onclick =  function() {
+       
+        {createfavoritCat(cat)};
 
-        
+    } 
         
        /* const box = document.createElement('div');
         box.id = 'cat-' + cat.id;
@@ -138,4 +144,4 @@ document.getElementById('show').onclick = function () {
     document.getElementById('img-cat-create').src = urlnew;
 }
 
-
+let cont = 0;
