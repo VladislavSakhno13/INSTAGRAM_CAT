@@ -12,10 +12,8 @@ xhr.onload = function () {
                 createCat(cats[i]);
             }
             document.getElementById('saveimg').onclick = function() {assignHandlers(cats)};
-           
-
             
-
+        
         } else {
             console.log(xhr.status);
 
@@ -24,9 +22,10 @@ xhr.onload = function () {
 };
 
 
+    
+
 
 function assignHandlers (cats) {
-    
    
     const cat = {
         "id": cats.length + 1,
@@ -40,17 +39,22 @@ function assignHandlers (cats) {
     document.getElementById('urlimg').value = "";
     document.getElementById('nameforcat').value = "";
 
-
-
+    if(document.getElementById('checktrue').checked) {
+        createfavoritCat(cat);
+    }
 }
-
-
 
 xhr.send();
 
 function createCat(cat) {
     const divElement = createCatHtml(cat);
     document.getElementById('cats-main-box').appendChild(divElement);
+    updateCatHtml(divElement, cat);
+}
+
+function createfavoritCat(cat) {
+    const divElement = createCatHtml(cat);
+    document.getElementById('favorites').appendChild(divElement);
     updateCatHtml(divElement, cat);
 }
 
@@ -124,7 +128,6 @@ function createCatHtml(cat) {
 function updateCatHtml(divElement, cat) {
     document.querySelector("#cat_" + cat.id).querySelector('#count').innerText = cat.likes;
     document.querySelector("#cat_" + cat.id).querySelector('#nameImg').innerText = cat.title;
-    //document.querySelector("#cat_" + cat.id).querySelector('#favoritIMG');
 
 }
 document.getElementById('show').onclick = function () {
