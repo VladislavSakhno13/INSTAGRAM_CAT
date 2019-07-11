@@ -13,7 +13,7 @@ xhr.onload = function () {
             for (var i = 0; i < cats.length; i++) {
                 createCat(cats[i]);
             }
-            document.getElementById('saveimg').onclick = function() {assignHandlers(cats)};
+            document.getElementById('saveimg').onclick = function() {addNewCat(cats)};
             
         
         } else {
@@ -24,7 +24,7 @@ xhr.onload = function () {
 };
 
 
-function assignHandlers (cats) {
+function addNewCat (cats) {
    
    if(document.getElementById('urlimg').value === ""){
        alert("URL not defined!!!");
@@ -43,7 +43,9 @@ function assignHandlers (cats) {
     document.getElementById('nameforcat').value = "";
 
     if(document.getElementById('checktrue').checked) {
+        catsfavorites.push(cats);
         createfavoritCat(cat);
+        
     }
 }
 
@@ -117,13 +119,21 @@ function createCatHtml(cat) {
         updateCatHtml(this.parentElement, cat);
     }
     favoritImg.onclick =  function() {
+        var index;
+        for(var i = 0; i< cats.length;i++){
+            if(cat == catsfavorites[i]){
+                index = i;
+            }
+            
+        }
         let result =  catsfavorites.find(item => item.id == cat.id );
         if (result){
             console.log('cat found');
             var perent = document.getElementById('favorites');
             var child = document.getElementById('cat_' + cat.id);
             perent.removeChild(child);
-        var index;
+        
+       
             catsfavorites.splice(index,1);
             return;
         }
