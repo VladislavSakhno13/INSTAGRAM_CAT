@@ -43,7 +43,7 @@ function addNewCat (cats) {
     document.getElementById('nameforcat').value = "";
 
     if(document.getElementById('checktrue').checked) {
-        catsfavorites.push(cats);
+        catsfavorites.push(cat);
         createfavoritCat(cat);
         
     }
@@ -52,21 +52,25 @@ function addNewCat (cats) {
 xhr.send();
 
 function createCat(cat) {
-    const divElement = createCatHtml(cat);
+    const divElement = createCatHtml(cat,true);
     document.getElementById('cats-main-box').appendChild(divElement);
     updateCatHtml(divElement, cat);
 }
 
 function createfavoritCat(cat) {
-    const divElement = createCatHtml(cat);
+    const divElement = createCatHtml(cat,false);
     document.getElementById('favorites').appendChild(divElement);
+   
     updateCatHtml(divElement, cat);
 }
 
 
-function createCatHtml(cat) {
+function createCatHtml(cat,bool) {
     const div = document.createElement('div');
+    if(bool == true){
     div.id = 'cat_' + cat.id;
+    }
+    else div.id = 'favor_' + cat.id;
 
     const p = document.createElement('p');
 
@@ -130,17 +134,14 @@ function createCatHtml(cat) {
         if (result){
             console.log('cat found');
             var perent = document.getElementById('favorites');
-            var child = document.getElementById('cat_' + cat.id);
+            var child = document.getElementById('favor_' + cat.id);
             perent.removeChild(child);
         
        
             catsfavorites.splice(index,1);
             return;
         }
-        else console.log('cat not found');
-        div.id = "favor_" + cat.id;
         catsfavorites.push(cat);
-        //console.log(result);
         {createfavoritCat(cat)};
        
         
@@ -153,6 +154,7 @@ function createCatHtml(cat) {
 function updateCatHtml(divElement, cat) {
     divElement.querySelector('#count').innerText = cat.likes;
     divElement.querySelector('#nameImg').innerText = cat.title;
+    
 
 }
 document.getElementById('show').onclick = function () {
