@@ -117,13 +117,20 @@ function createCatHtml(cat) {
         updateCatHtml(this.parentElement, cat);
     }
     favoritImg.onclick =  function() {
-       
-        catsfavorites.push(cat);
         let result =  catsfavorites.find(item => item.id == cat.id );
         if (result){
             console.log('cat found');
+            var perent = document.getElementById('favorites');
+            var child = document.getElementById('cat_' + cat.id);
+            perent.removeChild(child);
+        var index;
+            catsfavorites.splice(index,1);
+            return;
         }
-        console.log(result);
+        else console.log('cat not found');
+        div.id = "favor_" + cat.id;
+        catsfavorites.push(cat);
+        //console.log(result);
         {createfavoritCat(cat)};
        
         
