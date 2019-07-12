@@ -18,16 +18,20 @@ img{
     margin:  5px;
 }
 .mainBox,.BoxUrl{
+    
     display: inline-block;
     width: 50%;
     float: left;
+    
+    
 }
 
 body{
-    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvX4T950XF3FmlvBPaayJeyaZqYH5N0RTmcvfAn6N_zd6muvpYPw);
+    background-image: url(https://savageuniversal.com/wp-content/uploads/2015/05/1-palewashedwood-update-400x600.jpg);
 }
 .BoxUrl{
-    height: 100vh;
+    position: fixed;
+    min-width: 900px ;
 }
 #idImg{
     width: 300px;
@@ -42,6 +46,7 @@ body{
     left: 50%;
     margin-left: -150px;
     margin-top: 100px;
+    
 }
 #cats-main-box,#favorites{
     display: inline-block;
@@ -74,21 +79,22 @@ body{
     border: 2px solid #BDB76B;
     background: #F0E68C;
     text-align: center;
-    font-size: 15px;
+    font-size: 19px;
     cursor: pointer;
 }
-/*#save{
+#save{
    display: inline-block;
    width: 75px;
     height: 25px;
     border: 2px solid #BDB76B;
     background: #F0E68C;
     text-align: center;
-}*/
+}
 #img-cat-create{
     width: 300px;
     height: 300px;
 }
-/*#text{
-    margin-top: 10px;
-}*/
+#text{
+    margin-bottom: 10px;
+    
+}
