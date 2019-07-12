@@ -23,7 +23,6 @@ xhr.onload = function () {
     }
 };
 
-
 function addNewCat (cats) {
    
    if(document.getElementById('urlimg').value === ""){
@@ -80,10 +79,11 @@ function createCatHtml(cat,isFavorites) {
     img.src = cat.url;
     p.appendChild(img);
 
-    const like = document.createElement('input');
-    like.type = "button";
-    like.value = "Like";
+    const like = document.createElement('img');
+    //like.type = "button";
+    //like.value = "Like";
     like.id = "like";
+    like.src = "https://files.slack.com/files-pri/T0B1MT8Q4-FKVCCHFH9/favorites_off.jpg"
     div.appendChild(like);
 
     const span = document.createElement('span');
@@ -121,26 +121,27 @@ function createCatHtml(cat,isFavorites) {
     div.appendChild(favoritImg);
     favoritImg.onclick = function() {addToFaforitesList(favoritImg)};
     }
-
-    
-
     like.onclick = function () {
+        if(cat.likes != 0){
+            like.src = 'https://files.slack.com/files-pri/T0B1MT8Q4-FKVCCHFH9/favorites_off.jpg';
+            cat.likes = 0;
+            updateCatHtml(this.parentElement, cat);
+            return;
+        }
+        like.src = "https://files.slack.com/files-pri/T0B1MT8Q4-FL6QF03TP/favorites_on.jpg";
         cat.likes++;
         updateCatHtml(this.parentElement, cat);
-        like.style.background = 'red';
-    }
-     
+        
+    }    
       function addToFaforitesList(favoritImg) {
         favoritImg.style.background = 'red';
         var index;
         for(var i = 0; i< cats.length;i++){
             if(cat == catsfavorites[i]){
                 index = i;
-            }
-            
+            }     
         }
         if (index != undefined){
-            console.log('cat found');
             var perent = document.getElementById('favorites');
             var child = document.getElementById('favor_' + cat.id);
             perent.removeChild(child);
@@ -152,17 +153,12 @@ function createCatHtml(cat,isFavorites) {
         {createfavoritCat(cat)};
        
         
-    } 
-    
-       
-    
+    }    
     return div;
 }
 function updateCatHtml(divElement, cat) {
     divElement.querySelector('#count').innerText = cat.likes;
     divElement.querySelector('#nameImg').innerText = cat.title;
-    
-
 }
 document.getElementById('show').onclick = function () {
     let urlnew = document.getElementById('urlimg').value;

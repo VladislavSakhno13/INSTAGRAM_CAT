@@ -11,7 +11,10 @@ img{
 }
 
 #like{
-    margin-top: 10px;   
+    margin-top: 10px;
+    width: 40px;
+    height: 40px;
+    margin:  5px;
 }
 .mainBox,.BoxUrl{
     display: inline-block;
@@ -20,7 +23,7 @@ img{
 }
 
 body{
-    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU9idVOk4oQ15pJ8CdkzI1iv6f5CT4tK_Xr7eg5L-TMKY6I_m6Ug);
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvX4T950XF3FmlvBPaayJeyaZqYH5N0RTmcvfAn6N_zd6muvpYPw);
 }
 .BoxUrl{
     height: 100vh;
