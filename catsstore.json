@@ -4,25 +4,29 @@
             "id": 1,
             "title": "cat 1",
             "url": "https://http.cat/200",
-            "likes": 0
+            "likes": 0,
+            "favorcat" : false
         },
         {
             "id": 2,
             "title": "cat 2",
             "url": "https://http.cat/404",
-            "likes": 0
+            "likes": 0,
+            "favorcat" : false
         },
         {
             "id": 3,
             "title": "cat 3",
             "url": "https://http.cat/500",
-            "likes": 0
+            "likes": 0,
+            "favorcat" : false
         },
         {
             "id": 4,
             "title": "cat 4",
             "url": "https://http.cat/400",
-            "likes": 0
+            "likes": 0,
+            "favorcat" : false
         }
         
       ]
