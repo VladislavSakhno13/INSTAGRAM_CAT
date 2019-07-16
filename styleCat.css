@@ -62,34 +62,8 @@ body{
     width: 40px;
     height: 40px;
 }
-#saveimg{
-    display: inline-block;
-    width: 100px;
-    height: 30px;
-    border: 2px solid #BDB76B;
-    background: #F0E68C;
-    text-align: center;
-    font-size: 25px;
-    cursor: pointer;
-}
-#show{
-    display: inline-block;
-    width: 70px;
-    height: 20px;
-    border: 2px solid #BDB76B;
-    background: #F0E68C;
-    text-align: center;
-    font-size: 19px;
-    cursor: pointer;
-}
-#save{
-   display: inline-block;
-   width: 75px;
-    height: 25px;
-    border: 2px solid #BDB76B;
-    background: #F0E68C;
-    text-align: center;
-}
+
+
 #img-cat-create{
     width: 300px;
     height: 300px;
@@ -97,4 +71,18 @@ body{
 #text{
     margin-bottom: 10px;
     
+}
+.saveNameCat{
+    display: inline-block;
+   width: 75px;
+    height: 25px;
+    border: 2px solid #BDB76B;
+    background: #F0E68C;
+    text-align: center;
+}
+div > img {
+ box-shadow: none;
+}
+#nameImg{
+    margin: 5px;
 }
