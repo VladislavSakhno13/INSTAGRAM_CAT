@@ -175,5 +175,26 @@ document.getElementById('show').onclick = function () {
     let urlnew = document.getElementById('urlimg').value;
     document.getElementById('img-cat-create').src = urlnew;
 }
+document.getElementById('sortCat').onclick = function() {sortlikecat(cats)};
 
 
+function sortlikecat(cat) {
+    var perent = document.getElementById('cats-main-box'); 
+    for(let j = 0; j < cat.length-1;j++){
+    for(let i = 0; i < cat.length-1;i++){
+        if(cat[i].likes > cat[i+1].likes){
+            let arr = cat[i];
+            cat[i] = cat[i+1];
+            cat[i+1] = arr;
+        }      
+    }
+}
+    for(let l = 0; l < cat.length;l++){
+        var child = document.getElementById('cat_' + (l+1));
+        perent.removeChild(child);
+        createCat(cat[l]);
+    }
+    updateCatHtml(this.parentElement,cat);
+}
+
+ 
