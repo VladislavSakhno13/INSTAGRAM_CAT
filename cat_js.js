@@ -120,7 +120,13 @@ function createCatHtml(cat,isFavorites) {
         addToFaforitesList(this)};
     }
     like.onclick = function () {
-        if (cat.likedByMe) {
+        cat.likes++;
+        updateCatHtml(this.parentElement, cat);
+        if(cat.favorcat == true){
+            document.querySelector('#favor_' + cat.id).querySelector('#count').innerText = cat.likes;
+            document.querySelector('#cat_' + cat.id).querySelector('#count').innerText = cat.likes;
+        }
+        /*if (cat.likedByMe) {
             cat.likedByMe = false;
             cat.likes--;
             updateCatHtml(this.parentElement, cat);
@@ -136,11 +142,7 @@ function createCatHtml(cat,isFavorites) {
             document.querySelector('#favor_' + cat.id).querySelector('#count').innerText = cat.likes;
             document.querySelector('#favor_' + cat.id).querySelector('#like').src = "https://files.slack.com/files-pri/T0B1MT8Q4-FL6QF03TP/favorites_on.jpg";
         
-        }
-           
-              
-        
-        
+        }*/  
     }    
       function addToFaforitesList(favoritImg) { 
           if(cat.favorcat === true){
