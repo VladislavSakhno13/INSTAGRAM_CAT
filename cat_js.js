@@ -113,7 +113,7 @@ function createCatHtml(cat,isFavorites) {
 
     if(isFavorites == true){
     const favoritImg = document.createElement('img');
-    favoritImg.id = 'favoritIMG_' + cat.id;
+    favoritImg.id = 'favoritIMG_' ;
     favoritImg.className = "getCat";
     div.appendChild(favoritImg);
     favoritImg.onclick = function() {
@@ -165,7 +165,8 @@ function updateCatHtml(divElement, cat) {
     divElement.querySelector('#count').innerText = cat.likes;
     divElement.querySelector('#nameImg').innerText = cat.title;
     divElement.querySelector('#like').src = cat.likedByMe ? "https://files.slack.com/files-pri/T0B1MT8Q4-FL6QF03TP/favorites_on.jpg" : "https://files.slack.com/files-pri/T0B1MT8Q4-FKVCCHFH9/favorites_off.jpg";
-    document.querySelector("#cat_" + cat.id).querySelector("#favoritIMG_" + cat.id).src = cat.favorcat === false ? "https://st3.depositphotos.com/8511412/19063/i/1600/depositphotos_190634290-stock-photo-star-icon-outline-vector.jpg" : "https://cdn.pixabay.com/photo/2016/08/11/18/09/star-1586412_1280.png";
+    document.querySelector("#cat_" + cat.id).querySelector("#favoritIMG_").src = cat.favorcat === false ? "https://st3.depositphotos.com/8511412/19063/i/1600/depositphotos_190634290-stock-photo-star-icon-outline-vector.jpg" : "https://cdn.pixabay.com/photo/2016/08/11/18/09/star-1586412_1280.png";
+    //divElement.querySelector("#favoritIMG_").src = cat.favorcat === false ? "https://st3.depositphotos.com/8511412/19063/i/1600/depositphotos_190634290-stock-photo-star-icon-outline-vector.jpg" : "https://cdn.pixabay.com/photo/2016/08/11/18/09/star-1586412_1280.png";
 }
 document.getElementById('show').onclick = function () {
     if(document.getElementById('urlimg').value === ""){
@@ -175,11 +176,30 @@ document.getElementById('show').onclick = function () {
     let urlnew = document.getElementById('urlimg').value;
     document.getElementById('img-cat-create').src = urlnew;
 }
-document.getElementById('sortCat').onclick = function() {sortlikecat(cats)};
+document.getElementById('sortCat').onclick = function() {
+    sortlikecat(cats);
+    for(let l = 0; l < cats.length;l++){
+    var perent = document.getElementById('cats-main-box');
+        var child = document.querySelector('#cats-main-box > div');
+        perent.removeChild(child);
+    }
+    for( let i = 0; i< cats.length; i++){
+        createCat(cats[i]);
+    }
+    
+};
+document.getElementById('sortFaforit').onclick = function(){
+    sortlikecat(cats);
+    for( let i = 0; i< cats.length; i++){
+        var perent = document.getElementById('favorites');
+        var child = document.querySelector('#favor_' + (i+1));
+        perent.removeChild(child);
+        createfavoritCat(cats[i]);
+    }
+};
 
 
 function sortlikecat(cat) {
-    var perent = document.getElementById('cats-main-box'); 
     for(let j = 0; j < cat.length-1;j++){
     for(let i = 0; i < cat.length-1;i++){
         if(cat[i].likes > cat[i+1].likes){
@@ -189,12 +209,7 @@ function sortlikecat(cat) {
         }      
     }
 }
-    for(let l = 0; l < cat.length;l++){
-        var child = document.getElementById('cat_' + (l+1));
-        perent.removeChild(child);
-        createCat(cat[l]);
-    }
-    updateCatHtml(this.parentElement,cat);
+   
 }
 
  
