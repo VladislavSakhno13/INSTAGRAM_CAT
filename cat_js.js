@@ -166,7 +166,6 @@ function updateCatHtml(divElement, cat) {
     divElement.querySelector('#nameImg').innerText = cat.title;
     divElement.querySelector('#like').src = cat.likedByMe ? "https://files.slack.com/files-pri/T0B1MT8Q4-FL6QF03TP/favorites_on.jpg" : "https://files.slack.com/files-pri/T0B1MT8Q4-FKVCCHFH9/favorites_off.jpg";
     document.querySelector("#cat_" + cat.id).querySelector("#favoritIMG_").src = cat.favorcat === false ? "https://st3.depositphotos.com/8511412/19063/i/1600/depositphotos_190634290-stock-photo-star-icon-outline-vector.jpg" : "https://cdn.pixabay.com/photo/2016/08/11/18/09/star-1586412_1280.png";
-    //divElement.querySelector("#favoritIMG_").src = cat.favorcat === false ? "https://st3.depositphotos.com/8511412/19063/i/1600/depositphotos_190634290-stock-photo-star-icon-outline-vector.jpg" : "https://cdn.pixabay.com/photo/2016/08/11/18/09/star-1586412_1280.png";
 }
 document.getElementById('show').onclick = function () {
     if(document.getElementById('urlimg').value === ""){
@@ -198,8 +197,36 @@ document.getElementById('sortFaforit').onclick = function(){
     }
 };
 
+document.getElementById('sortCatBack').onclick = function(){
+    sortback(cats);
+    for(let l = 0; l < cats.length;l++){
+        var perent = document.getElementById('cats-main-box');
+            var child = document.querySelector('#cats-main-box > div');
+            perent.removeChild(child);
+        }
+        for( let i = 0; i< cats.length; i++){
+            createCat(cats[i]);
+        }
+}
+
+
+document.getElementById('sortFaforitBack').onclick = function(){
+    sortback(cats);
+    for( let i = 0; i< cats.length; i++){
+        var perent = document.getElementById('favorites');
+        var child = document.querySelector('#favor_' + (i+1));
+        perent.removeChild(child);
+        createfavoritCat(cats[i]);
+    }
+
+}
+
+
+
+
 
 function sortlikecat(cat) {
+   
     for(let j = 0; j < cat.length-1;j++){
     for(let i = 0; i < cat.length-1;i++){
         if(cat[i].likes > cat[i+1].likes){
@@ -209,7 +236,21 @@ function sortlikecat(cat) {
         }      
     }
 }
+    
+    
    
+}
+
+function sortback(cat){
+    for(let j = 0; j < cat.length-1;j++){
+        for(let i = 0; i < cat.length-1;i++){
+            if(cat[i].likes < cat[i+1].likes){
+                let arr = cat[i+1];
+                cat[i+1] = cat[i];
+                cat[i] = arr;
+            }      
+        }
+    }
 }
 
  
