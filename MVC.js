@@ -1,47 +1,94 @@
-var cats = [];
-var xhr = new XMLHttpRequest();
-
-xhr.open('GET', 'catsstore.json', true);
-
-xhr.onload = function () {
-    if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-            console.log('good!!!');
-            cats = JSON.parse(xhr.responseText);
-            for (var i = 0; i < cats.length; i++) {
-                createCat(cats[i]);
-                
+let model ={
+    init:function(){
+    
+        this.cats = [
+            {
+                "id": 1,
+                "title": "cat 1",
+                "url": "https://http.cat/200",
+                "likes": 0,
+                "favorcat" : true
+            },
+            {
+                "id": 2,
+                "title": "cat 2",
+                "url": "https://http.cat/404",
+                "likes": 0,
+                "favorcat" : true
+            },
+            {
+                "id": 3,
+                "title": "cat 3",
+                "url": "https://http.cat/500",
+                "likes": 0,
+                "favorcat" : false
+            },
+            {
+                "id": 4,
+                "title": "cat 4",
+                "url": "https://http.cat/400",
+                "likes": 0,
+                "favorcat" : false
             }
-            document.getElementById('saveimg').onclick = function() {addNewCat(cats)};
             
-        
-        } else {
-            console.log(xhr.status);
+          ]
+          
+          
+     },
+     
 
+    
+    getAll: function(){
+     return this.cats;
+    },
+    getFavorite:function(){
+        return this.cats.filter(x=>x.favorcat);
+    },
+
+    add: function(url,title,id){
+        const cat = {
+            "id": id,
+            "title": title ,
+            "url": url,
+            "likes": 0,
+            "favorcat" : false
         }
+        
+        
+        this.cats.push(cat);
     }
-};
+} 
 
-xhr.send();
+
 
 let controler = {
+    init:  function(model){
+        model.init();
+        view.init();
+    },
+ show: function(){
+    const cats = model.getFavorite();
+    view.render(cats);
+ },
+ addFavorie
+    
 
 }; 
 
 
 
-let view = function createHtml (cat,isFavorit){
-    const div = document.createElement('div');
-    if(isFavorites == true){
-    div.id = 'cat_' + cat.id;
-    }
-    else div.id = 'favor_' + cat.id;
+let view = {
+        render: function (cats){
+    for(var i = 0; i < cats.length; i++){
 
+    const div = document.createElement('div');
+    div.id = 'cat_' + cats[i].id;
+    
     const p = document.createElement('p');
     div.appendChild(p);
 
     const img = document.createElement('img');
-    img.src = cat.url;
+    img.src = cats[i].url;
     p.appendChild(img);
 
     const like = document.createElement('img');
@@ -50,45 +97,48 @@ let view = function createHtml (cat,isFavorit){
 
     const span = document.createElement('span');
     span.id = "count";
+    span.valur = cats[i].likes;
     div.appendChild(span);
 
-    if(isFavorites == true){
-        const input = document.createElement('input');
-        input.id = "text";
-        div.appendChild(input);
-    
-        const save = document.createElement('p');
-        save.innerText = "Save";
-        save.id = "save";
-        save.className = "saveNameCat"
-        div.appendChild(save);
-    
-        save.onclick = function() {
-            cat.title = input.value;
-            updateCatHtml(this.parentElement, cat);
-            input.value = "";
-            if(cat.favorcat === true){
-                document.querySelector('#favor_' + cat.id).querySelector('#nameImg').innerHTML = cat.title;
-            }
-        }
-        }
+   
+    const input = document.createElement('input');
+    input.id = "text";
+    div.appendChild(input);
 
-        const nameCat = document.createElement('span');
-        nameCat.id = "nameImg";
-        div.appendChild(nameCat);
+    const save = document.createElement('p');
+    save.innerText = "Save";
+    save.id = "save";
+    save.className = "saveNameCat"
+    div.appendChild(save);
+   
 
-        if(isFavorites == true){
-            const favoritImg = document.createElement('img');
-            favoritImg.id = 'favoritIMG_' ;
-            favoritImg.className = "getCat";
-            div.appendChild(favoritImg);
-            }
-};
+    const nameCat = document.createElement('span');
+    nameCat.id = "nameImg";
+    div.appendChild(nameCat);
 
 
-let model = {
+    const favoritImg = document.createElement('img');
+    favoritImg.id = 'favoritIMG_' ;
+    favoritImg.className = "getCat";
+    div.appendChild(favoritImg);
 
-    
+    document.getElementById('cats-main-box').appendChild(div);
+    }
+                
+    },
+       init: function(){
+            
+       } 
+       
+}
 
-};
+
+controler.init();
+controler.show();
+
+
+
+
+
+
 
