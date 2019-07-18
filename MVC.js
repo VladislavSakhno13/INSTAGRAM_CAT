@@ -1,4 +1,4 @@
-let model ={
+let catmodel ={
     init:function(){
     
         this.cats = [
@@ -63,14 +63,16 @@ let model ={
 
 let controler = {
     init:  function(model){
+        this.model=model;
         model.init();
         view.init();
     },
  show: function(){
-    const cats = model.getFavorite();
+    const cats = this.model.getFavorite();
     view.render(cats);
  },
- addFavorie
+
+ 
     
 
 }; 
@@ -133,7 +135,7 @@ let view = {
 }
 
 
-controler.init();
+controler.init(catmodel);
 controler.show();
 
 
