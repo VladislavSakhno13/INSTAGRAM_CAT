@@ -189,19 +189,24 @@ document.getElementById('sortCat').onclick = function() {
 };
 document.getElementById('sortFaforit').onclick = function(){
     sortlikecat(cats);
+    filtercats = cats.filter(cats => cats.favorcat === true);
+    if(cats.find(item => item.favorcat === true)){
+        for(let l = 0; l < filtercats.length;l++){
+            var perent = document.getElementById('favorites');
+            var child = document.querySelector('#favorites > div');
+            perent.removeChild(child);
+            }
     for( let i = 0; i< cats.length; i++){
-        var perent = document.getElementById('favorites');
-        var child = document.querySelector('#favor_' + (i+1));
-        perent.removeChild(child);
-        createfavoritCat(cats[i]);
+        createfavoritCat(filtercats[i]);
     }
+}
 };
 
 document.getElementById('sortCatBack').onclick = function(){
     sortback(cats);
     for(let l = 0; l < cats.length;l++){
         var perent = document.getElementById('cats-main-box');
-            var child = document.querySelector('#cats-main-box > div');
+        var child = document.querySelector('#cats-main-box > div');
             perent.removeChild(child);
         }
         for( let i = 0; i< cats.length; i++){
@@ -212,12 +217,17 @@ document.getElementById('sortCatBack').onclick = function(){
 
 document.getElementById('sortFaforitBack').onclick = function(){
     sortback(cats);
-    for( let i = 0; i< cats.length; i++){
+    filtercats = cats.filter(cats => cats.favorcat === true);
+    if(cats.find(item => item.favorcat === true)){
+        for(let l = 0; l < filtercats.length; l++){
         var perent = document.getElementById('favorites');
-        var child = document.querySelector('#favor_' + (i+1));
+        var child = document.querySelector('#favorites > div');
         perent.removeChild(child);
-        createfavoritCat(cats[i]);
+        }
+    for( let i = 0; i< cats.length; i++){
+        createfavoritCat(filtercats[i]);
     }
+}
 
 }
 
