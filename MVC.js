@@ -7,14 +7,14 @@ let catmodel ={
                 "title": "cat 1",
                 "url": "https://http.cat/200",
                 "likes": 0,
-                "favorcat" : true
+                "favorcat" : false
             },
             {
                 "id": 2,
                 "title": "cat 2",
                 "url": "https://http.cat/404",
                 "likes": 0,
-                "favorcat" : true
+                "favorcat" : false
             },
             {
                 "id": 3,
@@ -45,13 +45,13 @@ let catmodel ={
         return this.cats.filter(x=>x.favorcat);
     },
 
-    add: function(url,title,id){
+    add: function(url,title,id,or){
         const cat = {
             "id": id,
             "title": title ,
             "url": url,
             "likes": 0,
-            "favorcat" : false
+            "favorcat" : or
         }
         
         
@@ -73,21 +73,35 @@ let controler = {
     document.getElementById('saveimg').onclick = function(){
         let url = document.getElementById('urlimg').value;
         let title = document.getElementById('nameforcat').value;
-        let id = catmodel.getAll().length+1;
-        for( let i = 0; i < catmodel.getAll().length; i++){
+        let id = controler.model.getAll().length+1;
+        let or = false;
+        if(document.getElementById('checktrue').checked){
+            or = true;
+        }
+        for( let i = 0; i < controler.model.getAll().length; i++){
             var perent = document.getElementById('cats-main-box');
             var child = document.querySelector('#cats-main-box > div');
             perent.removeChild(child);
         }
-         catmodel.add(url,title,id);
-         const cat = catmodel.getAll();
+        controler.model.add(url,title,id,or);
+         const cat = controler.model.getAll();
+         const catfavorit = controler.model.getFavorite();
          view.render(cat);
+         view.renderfavorits(catfavorit);
+         document.getElementById('img-cat-create').src = "https://highloadcup.ru/static/core/img/placeholder_200.png";
+         document.getElementById('urlimg').value = "";
+         document.getElementById('nameforcat').value = "";
         
     }
-
-    
-   
+    document.getElementById('like').onclick = function(){
+        
+        
+    }  
  },
+ change: function(){
+     document.getElementById('like')
+
+ }
 
  
     
@@ -112,6 +126,7 @@ let view = {
 
     const like = document.createElement('img');
     like.id = "like";
+    like.src = "like.png";
     div.appendChild(like);
 
     const span = document.createElement('span');
@@ -162,6 +177,7 @@ let view = {
     
         const like = document.createElement('img');
         like.id = "like";
+        like.src = "https://files.slack.com/files-pri/T0B1MT8Q4-FKVCCHFH9/favorites_off.jpg";
         div.appendChild(like);
     
         const span = document.createElement('span');
@@ -188,6 +204,7 @@ let view = {
 
 controler.init(catmodel);
 controler.show();
+controler.change();
 
 
 
