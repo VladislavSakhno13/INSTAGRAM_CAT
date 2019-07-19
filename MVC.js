@@ -93,13 +93,15 @@ let controler = {
          document.getElementById('nameforcat').value = "";
         
     }
-    document.getElementById('like').onclick = function(){
-        
-        
-    }  
+    
  },
  change: function(){
-     document.getElementById('like')
+     const object = this.model.getAll();
+     document.querySelector('#like').onclick = function() {
+         alert("hh");
+     }
+     
+     
 
  }
 
@@ -177,7 +179,7 @@ let view = {
     
         const like = document.createElement('img');
         like.id = "like";
-        like.src = "https://files.slack.com/files-pri/T0B1MT8Q4-FKVCCHFH9/favorites_off.jpg";
+        like.src = "like.png";
         div.appendChild(like);
     
         const span = document.createElement('span');
