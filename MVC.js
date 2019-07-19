@@ -68,8 +68,24 @@ let controler = {
         view.init();
     },
  show: function(){
-    const cats = this.model.getFavorite();
-    view.render(cats);
+    const cats = this.model.getAll();
+     view.render(cats);
+    //const catsfavorits = this.model.getFavorite();
+   // view.renderfavorits(catsfavorits);
+    document.getElementById('saveimg').onclick = function(){
+         catmodel.add(1,1,1);
+         const cat = catmodel.getAll();
+         /*for(let l = 0; l < cat.length;l++){
+            var perent = document.getElementById('cats-main-box');
+            var child = document.querySelector('#cat_' + cat.id);
+            perent.removeChild(child);
+            }*/
+         view.render(cat);
+        
+    }
+
+    
+   
  },
 
  
@@ -99,7 +115,7 @@ let view = {
 
     const span = document.createElement('span');
     span.id = "count";
-    span.valur = cats[i].likes;
+    span.innerHTML = cats[i].likes;
     div.appendChild(span);
 
    
@@ -116,6 +132,7 @@ let view = {
 
     const nameCat = document.createElement('span');
     nameCat.id = "nameImg";
+    nameCat.innerHTML = cats[i].title;
     div.appendChild(nameCat);
 
 
@@ -128,6 +145,39 @@ let view = {
     }
                 
     },
+
+    renderfavorits: function (cats){
+        for(var i = 0; i < cats.length; i++){
+    
+        const div = document.createElement('div');
+        div.id = 'cat_' + cats[i].id;
+        
+        const p = document.createElement('p');
+        div.appendChild(p);
+    
+        const img = document.createElement('img');
+        img.src = cats[i].url;
+        p.appendChild(img);
+    
+        const like = document.createElement('img');
+        like.id = "like";
+        div.appendChild(like);
+    
+        const span = document.createElement('span');
+        span.id = "count";
+        span.valur = cats[i].likes;
+        div.appendChild(span);
+       
+
+        const nameCat = document.createElement('span');
+        nameCat.id = "nameImg";
+        div.appendChild(nameCat);
+    
+        document.getElementById('favorites').appendChild(div);
+        }
+                    
+        },
+
        init: function(){
             
        } 
