@@ -70,16 +70,17 @@ let controler = {
  show: function(){
     const cats = this.model.getAll();
      view.render(cats);
-    //const catsfavorits = this.model.getFavorite();
-   // view.renderfavorits(catsfavorits);
     document.getElementById('saveimg').onclick = function(){
-         catmodel.add(1,1,1);
-         const cat = catmodel.getAll();
-         /*for(let l = 0; l < cat.length;l++){
+        let url = document.getElementById('urlimg').value;
+        let title = document.getElementById('nameforcat').value;
+        let id = catmodel.getAll().length+1;
+        for( let i = 0; i < catmodel.getAll().length; i++){
             var perent = document.getElementById('cats-main-box');
-            var child = document.querySelector('#cat_' + cat.id);
+            var child = document.querySelector('#cats-main-box > div');
             perent.removeChild(child);
-            }*/
+        }
+         catmodel.add(url,title,id);
+         const cat = catmodel.getAll();
          view.render(cat);
         
     }
