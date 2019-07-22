@@ -62,62 +62,56 @@ let catmodel ={
 
 
 let controler = {
-    init:  function(model){
+    init:  function(model,view,viewform){
         this.model=model;
+        this.view = view;
+        this.viewform = viewform;
         model.init();
         view.init();
+        viewform.initform();
     },
  show: function(){
     const cats = this.model.getAll();
      view.render(cats);
-    document.getElementById('saveimg').onclick = function(){
-        let url = document.getElementById('urlimg').value;
-        let title = document.getElementById('nameforcat').value;
+     viewform.renderform(); 
+        let url = viewform.getUrl();
+        let title = viewform.getName();
         let id = controler.model.getAll().length+1;
         let or = false;
-        if(document.getElementById('checktrue').checked){
-            or = true;
+        if(url != ""){
+        this.model.add(url,title,id,or);
+        const cat = controler.model.getAll();
+        view.render(cat);
         }
-        for( let i = 0; i < controler.model.getAll().length; i++){
-            var perent = document.getElementById('cats-main-box');
-            var child = document.querySelector('#cats-main-box > div');
-            perent.removeChild(child);
-        }
-        controler.model.add(url,title,id,or);
-         const cat = controler.model.getAll();
-         const catfavorit = controler.model.getFavorite();
-         view.render(cat);
-         view.renderfavorits(catfavorit);
-         document.getElementById('img-cat-create').src = "https://highloadcup.ru/static/core/img/placeholder_200.png";
-         document.getElementById('urlimg').value = "";
-         document.getElementById('nameforcat').value = "";
-        
+    },
+    addCat:  function(){
+      
     }
+     
+     
+     
+
     
- },
- change: function(){
-     const object = this.model.getAll();
-     document.querySelector('#like').onclick = function() {
-         alert("hh");
-     }
-     
-     
-
- }
-
  
-    
-
 }; 
 
 
 
 let view = {
-        render: function (cats){
+    
+    render: function (cats){
+    
+       
+    var perent = document.getElementById('cats-main-box');
+    perent.innerHTML = undefined;
+     
+        
+
     for(var i = 0; i < cats.length; i++){
 
     const div = document.createElement('div');
     div.id = 'cat_' + cats[i].id;
+    div.className = "AllCats";
     
     const p = document.createElement('p');
     div.appendChild(p);
@@ -129,6 +123,7 @@ let view = {
     const like = document.createElement('img');
     like.id = "like";
     like.src = "like.png";
+    like.className = "butlike";
     div.appendChild(like);
 
     const span = document.createElement('span');
@@ -161,6 +156,8 @@ let view = {
 
     document.getElementById('cats-main-box').appendChild(div);
     }
+
+   
                 
     },
 
@@ -179,6 +176,7 @@ let view = {
     
         const like = document.createElement('img');
         like.id = "like";
+        
         like.src = "like.png";
         div.appendChild(like);
     
@@ -194,6 +192,8 @@ let view = {
     
         document.getElementById('favorites').appendChild(div);
         }
+        
+   
                     
         },
 
@@ -202,11 +202,63 @@ let view = {
        } 
        
 }
+ let viewform = {
+     renderform: function(){
+    const formdiv = document.createElement('div');
+
+    const pForm = document.createElement('p');
+    pForm.id="idImg";
+    formdiv.appendChild(pForm);
+
+    const imgForm = document.createElement('img');
+    imgForm.id="img-cat-create";
+    pForm.appendChild(imgForm);
+
+    const UrlForm = document.createElement('input');
+    UrlForm.id="urlimg";
+    UrlForm.placeholder = "URL";
+    formdiv.appendChild(UrlForm);
+
+    const nameForm = document.createElement('input');
+    nameForm.id="nameforcat";
+    nameForm.placeholder = "name";
+    formdiv.appendChild(nameForm);
+
+    const showForm = document.createElement('p');
+    showForm.className = "saveNameCat";
+    showForm.innerText = "show";
+    formdiv.appendChild(showForm);
+
+    const saveForm = document.createElement('p');
+    saveForm.className = "saveNameCat";
+    saveForm.innerText = "Save";
+    saveForm.id = "saveCat";
+    formdiv.appendChild(saveForm);
+    
+   
+    
+
+    document.getElementsByClassName('BoxUrl')[0].appendChild(formdiv);
+     },
+
+     getUrl: function(){
+       return document.getElementById('urlimg').value;
+     },
+     getName: function(){
+         return document.getElementById('nameforcat').value; 
+     },
+     
+     
+
+     initform: function(){
+
+     }
+ }
 
 
-controler.init(catmodel);
+controler.init(catmodel,view,viewform);
 controler.show();
-controler.change();
+
 
 
 
