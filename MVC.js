@@ -56,7 +56,14 @@ let catmodel ={
         
         
         this.cats.push(cat);
+    },
+    addLike(){
+        let catscats = catmodel.getAll();
+        for( var i = 0; i < catscats.length;i++){
+        catscats[i].likes++;
+        }
     }
+
 } 
 
 
@@ -73,20 +80,32 @@ let controler = {
  show: function(){
     const cats = this.model.getAll();
      view.render(cats);
-     viewform.renderform(); 
+     viewform.renderform();
+     
+    let knopka = viewform.getElement();
+    knopka.addEventListener('click',this.addCat);
+
+    let bittonlike = view.getLike();
+    for(var i = 0; i < bittonlike.length; i++){
+    bittonlike[i].addEventListener('click',controler.model.addLike);
+    }
+    },
+
+    addCat:  function(){
         let url = viewform.getUrl();
         let title = viewform.getName();
         let id = controler.model.getAll().length+1;
         let or = false;
-        if(url != ""){
-        this.model.add(url,title,id,or);
+        if(viewform.getBox().checked){
+            or = true;
+        }
+        controler.model.add(url,title,id,or);
         const cat = controler.model.getAll();
         view.render(cat);
-        }
+        const favorCats = controler.model.getFavorite();
+        view.renderfavorits(favorCats);
     },
-    addCat:  function(){
-      
-    }
+    
      
      
      
@@ -103,9 +122,20 @@ let view = {
     
        
     var perent = document.getElementById('cats-main-box');
-    perent.innerHTML = undefined;
+    perent.innerHTML = "";
      
         
+   const forward =  document.createElement('input');
+   forward.type = "button";
+   forward.value = "forward";
+   document.getElementById('cats-main-box').appendChild(forward);
+
+   const back =  document.createElement('input');
+   back.type = "button";
+   back.value = "back";
+   document.getElementById('cats-main-box').appendChild(back);
+   
+
 
     for(var i = 0; i < cats.length; i++){
 
@@ -124,6 +154,9 @@ let view = {
     like.id = "like";
     like.src = "like.png";
     like.className = "butlike";
+    like.onclick = function(){
+        span.innerHTML++;
+    }
     div.appendChild(like);
 
     const span = document.createElement('span');
@@ -155,13 +188,34 @@ let view = {
     div.appendChild(favoritImg);
 
     document.getElementById('cats-main-box').appendChild(div);
-    }
-
-   
-                
+    }               
     },
+   
+    getLike: function(){
+        return document.getElementsByClassName('butlike');;
+    },
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     renderfavorits: function (cats){
+        var perent = document.getElementById('favorites');
+        perent.innerHTML = "";
+
         for(var i = 0; i < cats.length; i++){
     
         const div = document.createElement('div');
@@ -234,10 +288,13 @@ let view = {
     saveForm.innerText = "Save";
     saveForm.id = "saveCat";
     formdiv.appendChild(saveForm);
-    
-   
-    
 
+    const box = document.createElement('input');
+    box.type = "checkbox";
+    box.id = "yesOrno";
+    formdiv.appendChild(box);
+
+    
     document.getElementsByClassName('BoxUrl')[0].appendChild(formdiv);
      },
 
@@ -247,9 +304,13 @@ let view = {
      getName: function(){
          return document.getElementById('nameforcat').value; 
      },
-     
-     
-
+    getElement: function(){
+        return document.getElementById('saveCat');
+    },
+    getBox: function(){
+        return document.getElementById('yesOrno');
+    },
+    
      initform: function(){
 
      }
@@ -258,6 +319,7 @@ let view = {
 
 controler.init(catmodel,view,viewform);
 controler.show();
+
 
 
 
