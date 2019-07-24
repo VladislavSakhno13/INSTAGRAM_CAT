@@ -57,11 +57,9 @@ let catmodel ={
         
         this.cats.push(cat);
     },
-    addLike(){
-        let catscats = catmodel.getAll();
-        for( var i = 0; i < catscats.length;i++){
-        catscats[i].likes++;
-        }
+    addLike(i){
+     this.cats[i].likes++;
+        
     }
 
 } 
@@ -85,10 +83,14 @@ let controler = {
     let knopka = viewform.getElement();
     knopka.addEventListener('click',this.addCat);
 
-    let bittonlike = view.getLike();
-    for(var i = 0; i < bittonlike.length; i++){
-    bittonlike[i].addEventListener('click',controler.model.addLike);
-    }
+   
+
+
+     
+     
+    
+    //view.getElement().addEventListener('click',view.getIdCount);
+    
     },
 
     addCat:  function(){
@@ -105,7 +107,13 @@ let controler = {
         const favorCats = controler.model.getFavorite();
         view.renderfavorits(favorCats);
     },
-    
+
+    removeViewWithLike: function(){
+        
+        controler.model.addLike(0);
+        const remowe = controler.model.getAll();
+        view.render(remowe);
+    }
      
      
      
@@ -151,16 +159,14 @@ let view = {
     p.appendChild(img);
 
     const like = document.createElement('img');
-    like.id = "like";
+    like.id =  cats[i].id - 1;
     like.src = "like.png";
     like.className = "butlike";
-    like.onclick = function(){
-        span.innerHTML++;
-    }
     div.appendChild(like);
 
     const span = document.createElement('span');
     span.id = "count";
+    span.className = "countlike";
     span.innerHTML = cats[i].likes;
     div.appendChild(span);
 
@@ -190,25 +196,14 @@ let view = {
     document.getElementById('cats-main-box').appendChild(div);
     }               
     },
-   
-    getLike: function(){
-        return document.getElementsByClassName('butlike');;
+   getElement: function(){
+       
+       return document.getElementsByClassName('butlike');
+   },
+
+    getIdCount: function(){
+       console.log(this.id);
     },
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -319,7 +314,7 @@ let view = {
 
 controler.init(catmodel,view,viewform);
 controler.show();
-
+//controler.removeViewWithLike();
 
 
 

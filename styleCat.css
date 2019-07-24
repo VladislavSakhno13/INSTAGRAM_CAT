@@ -11,7 +11,7 @@ img{
     box-shadow: 5px 5px 10px  #000;
 }
 
-#like{
+.butlike{
     margin-top: 10px;
     width: 40px;
     height: 40px;
